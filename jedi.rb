@@ -1,20 +1,23 @@
 class Jedi
 
-  attr_reader :name, :ap
+  attr_reader :name, :ap, :side_force
   attr_accessor :hp
 
-  def initialize(name)
+  def initialize(name, side)
     @name=name
     @hp=20
     @ap=10
+    @side_force=side
   end
 
   def summary
-    "#{@name} \t - HP: #{@hp} AP: #{@ap}"
+    feed = "#{@name} \t - HP: #{@hp} AP: #{@ap}"
+    feed += " Dead Jedi!" if is_dead?
+    feed
   end
 
   def attack(ennemy)
-    puts "#{@name} attacks #{ennemy.name}"
+    puts "#{@name.strip} attacks #{ennemy.name.strip}"
     damage = rand(@ap) + 1
     ennemy.takes_damage(damage)
   end
